@@ -6,9 +6,13 @@
     <PackageId>ISO3166-1-ZH</PackageId>
     <Authors>Frank Tsai</Authors>
     <Product>ISO3166-1-ZH</Product>
-    <Description>An package contains country list with chinese name (both traditional and simplified). Data convert from wiki page.</Description>
-    <Copyright>https://creativecommons.org/licenses/by-sa/3.0/</Copyright>
+    <Description>This package contains country list with offical english name and chinese name (both traditional and simplified) follow ISO 3166-1. Data convert from wiki page.
+這個套件包含了 ISO 3166-1 規則的官方英文與中文（正體與簡體）國家名稱，資料來源為 Wiki 頁面。</Description>
+    <Copyright></Copyright>
     <PackageTags>iso3166 country chinese 中文</PackageTags>
+    <PackageProjectUrl>https://github.com/Dynafloating/iso3166-1-zh</PackageProjectUrl>
+    <PackageLicenseUrl>https://creativecommons.org/licenses/by-sa/3.0/</PackageLicenseUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
