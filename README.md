@@ -22,7 +22,7 @@ PM> Install-Package ISO3166-1-ZH
 ```
 
 ## Use the package - 使用此套件
-To accessing the list:
+To access the list:
 ```
 List<CountryModel> list = ISO3166.Country.List;
 ```
