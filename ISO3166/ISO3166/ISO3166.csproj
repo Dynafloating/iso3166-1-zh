@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>ISO3166-1-ZH</PackageId>
+    <Authors>Frank Tsai</Authors>
+    <Product>ISO3166-1-ZH</Product>
+    <Description>An package contains country list with chinese name (both traditional and simplified). Data convert from wiki page.</Description>
+    <Copyright>https://creativecommons.org/licenses/by-sa/3.0/</Copyright>
+    <PackageTags>iso3166 country chinese 中文</PackageTags>
+  </PropertyGroup>
+
+</Project>

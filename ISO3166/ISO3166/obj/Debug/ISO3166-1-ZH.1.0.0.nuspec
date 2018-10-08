@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ISO3166-1-ZH</id>
+    <version>1.0.0</version>
+    <authors>Frank Tsai</authors>
+    <owners>Frank Tsai</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An package contains country list with chinese name (both traditional and simplified). Data convert from wiki page.</description>
+    <copyright>https://creativecommons.org/licenses/by-sa/3.0/</copyright>
+    <tags>iso3166 country chinese 中文</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard1.0">
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\bin\Debug\netstandard1.0\ISO3166.dll" target="lib\netstandard1.0\ISO3166.dll" />
+  </files>
+</package>

@@ -1,0 +1,9 @@
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\bin\Debug\netstandard1.0\ISO3166.deps.json
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\bin\Debug\netstandard1.0\ISO3166.dll
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\bin\Debug\netstandard1.0\ISO3166.pdb
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\obj\Debug\netstandard1.0\ISO3166.csprojAssemblyReference.cache
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\obj\Debug\netstandard1.0\ISO3166.csproj.CoreCompileInputs.cache
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\obj\Debug\netstandard1.0\ISO3166.AssemblyInfoInputs.cache
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\obj\Debug\netstandard1.0\ISO3166.AssemblyInfo.cs
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\obj\Debug\netstandard1.0\ISO3166.dll
+C:\Users\frank\Source\Repos\iso3166-1-zh\ISO3166\ISO3166\obj\Debug\netstandard1.0\ISO3166.pdb
