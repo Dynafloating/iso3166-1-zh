@@ -9,7 +9,7 @@ Country list contains code, names and chinese name (both traditional and simplif
 - https://zh.wikipedia.org/zh-cn/ISO_3166-1
 
 
-## Install package via NuGet (使用 NuGet 安裝此套件)
+## Install package via NuGet - 使用 NuGet 安裝此套件
 You can install this package from [NuGet Page](https://www.nuget.org/packages/ISO3166-1-ZH/) or use following command:
 ```
 PM> Install-Package ISO3166-1-ZH
@@ -21,8 +21,25 @@ PM> Install-Package ISO3166-1-ZH
 PM> Install-Package ISO3166-1-ZH
 ```
 
+## Use the package - 使用此套件
+To accessing the list:
+```
+List<CountryModel> list = ISO3166.Country.List;
+```
 
-## Get the lastest data by WebCrawler (使用 WebCrawler 取得最新資料)
+Properties of CountryModel:
+```
+public string Name { get; set; }
+public string TwoLetterCode { get; set; }
+public string ThreeLetterCode { get; set; }
+public string NumericCode { get; set; }
+public string TraditionalChineseName { get; set; }
+public string SimplifiedChineseName { get; set; }
+public bool Independent { get; set; }
+```
+
+
+## Get the lastest data by WebCrawler - 使用 WebCrawler 取得最新資料
 Use WebCrawler to retrieve this lastest country data from Wiki page, and generate iso3166.json and Country.cs.
 1. [Download](https://github.com/Dynafloating/iso3166-1-zh/releases/tag/v1.0.1) WebCrawler.
 2. Run WebCrawler, an output path (folder) is needed to store generated files; if provided empty, it will store at same folder contains the application.
