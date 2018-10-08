@@ -10,13 +10,13 @@ Country list contains code, names and chinese name (both traditional and simplif
 
 
 ## Install package via NuGet (使用 NuGet 安裝此套件)
-You can install this package from [NuGet Page](https://www.nuget.org/packages/) or use following command:
+You can install this package from [NuGet Page](https://www.nuget.org/packages/ISO3166-1-ZH/) or use following command:
 ```
 PM> Install-Package ISO3166-1-ZH
 ```
 
 ---
-您可以透過 [NuGet](https://www.nuget.org/packages/) 下載此套件，或使用下列指令：
+您可以透過 [NuGet](https://www.nuget.org/packages/ISO3166-1-ZH/) 下載此套件，或使用下列指令：
 ```
 PM> Install-Package ISO3166-1-ZH
 ```
@@ -24,12 +24,12 @@ PM> Install-Package ISO3166-1-ZH
 
 ## Get the lastest data by WebCrawler (使用 WebCrawler 取得最新資料)
 Use WebCrawler to retrieve this lastest country data from Wiki page, and generate iso3166.json and Country.cs.
-1. [Download](https://github.com/Dynafloating/iso3166-1-zh) WebCrawler.
+1. [Download](https://github.com/Dynafloating/iso3166-1-zh/releases/tag/v1.0.1) WebCrawler.
 2. Run WebCrawler, an output path (folder) is needed to store generated files; if provided empty, it will store at same folder contains the application.
 3. Two files will be generate: iso3166.json and Country.cs.
 
 ---
 使用專案內的 WebCrawler 從 Wiki 頁面上取得最新的國家資料，將產出 iso3166.json 和 Country.cs 兩個檔案。
-1. [下載](https://github.com/Dynafloating/iso3166-1-zh) WebCrawler。
+1. [下載](https://github.com/Dynafloating/iso3166-1-zh/releases/tag/v1.0.1) WebCrawler。
 2. 執行 WebCrawler，畫面將會詢問要存放產出檔案的資料夾路徑；如果沒有提供，將會產出在執行檔的相同資料夾。
 3. 兩個檔案會被產出：iso3166.json 與 Country.cs。
