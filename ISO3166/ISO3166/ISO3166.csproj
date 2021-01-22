@@ -11,8 +11,9 @@
     <Copyright></Copyright>
     <PackageTags>iso3166 country chinese 中文</PackageTags>
     <PackageProjectUrl>https://github.com/Dynafloating/iso3166-1-zh</PackageProjectUrl>
-    <PackageLicenseUrl>https://creativecommons.org/licenses/by-sa/3.0/</PackageLicenseUrl>
-    <Version>1.0.1</Version>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <Version>1.0.2</Version>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>
