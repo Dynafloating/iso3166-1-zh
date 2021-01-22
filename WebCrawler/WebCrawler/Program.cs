@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 
 namespace WebCrawler
 {
@@ -12,16 +12,18 @@ namespace WebCrawler
     {
         static readonly string Wiki_TW = "https://zh.wikipedia.org/zh-tw/ISO_3166-1";
         static readonly string Wiki_CN = "https://zh.wikipedia.org/zh-cn/ISO_3166-1";
-        static List<Model> Models { get; set; } = new List<Model>();
+        static List<Model> _models { get; set; } = new List<Model>();
 
-        static void Main(string[] args)
+        static void Main(string[] _)
         {
             Console.WriteLine("Welcome to ISO3166-1 web crawler!");
             Console.WriteLine("this console application will help you retrieve data from WIKI page");
             Console.WriteLine("and convert it to .cs file and JSON format.");
             Console.WriteLine("Generated files will save to (please provide folder path): ");
+
             var path = Console.ReadLine();
             var fullPath = Path.GetFullPath(!string.IsNullOrEmpty(path) ? path : ".");
+
             if (!Directory.Exists(fullPath))
             {
                 Console.WriteLine("Invalid path, directory is not exists!");
@@ -29,25 +31,31 @@ namespace WebCrawler
             }
 
             Console.WriteLine("Retrieving...");
-            ProcessTW();
-            ProcessCN();
+
+            _processTW();
+            _processCN();
 
             Console.WriteLine("Generating files...");
-            GenerateFile(fullPath);
+
+            _generateFile(fullPath);
 
             Console.WriteLine("Press any key to end");
             Console.ReadLine();
         }
 
-        static void ProcessTW()
+        static void _processTW()
         {
-            var webClient = new WebClient();
+            using var webClient = new WebClient();
+
             var webData = webClient.DownloadString(Wiki_TW);
+
             var tbody = webData.Split("<table class=\"wikitable sortable\">")[1]
                 .Split("<dl><dt>說明：</dt></dl>")[0].Replace("<tbody>", "").Replace("</tbody></table>", "");
+
             var trs = tbody.Split("<tr>")
                 .Select(o => o.Replace("</tr>", ""))
                 .Where(o => o != "\n\n" && !o.StartsWith("\n<th scope=\"col\">"));
+
             foreach (var tr in trs)
             {
                 var tds = tr.Split("</td>").Select(o => o.Replace("<td>", "").Replace("<td align=\"center\">", "")).ToList();
@@ -56,7 +64,7 @@ namespace WebCrawler
                 if (name.Contains("</span>"))
                 {
                     var array = name.Split("</span>");
-                    name = array[array.Length - 2].Split(">")[1];
+                    name = array[^2].Split(">")[1];
                 }
 
                 if (name.Contains(" ("))
@@ -72,10 +80,10 @@ namespace WebCrawler
                 if (name.StartsWith("Taiwan"))
                 {
                     name = name.Split(",")[0];
-                    tds[5] = tds[5].Replace("中國台灣省", "台灣");
+                    tds[5] = tds[5].Replace("中國台灣省", "台灣"); // Replace this with ROC or remove this line to meet your need.
                 }
 
-                Models.Add(new Model()
+                _models.Add(new Model()
                 {
                     Name = name,
                     TwoLetterCode = tds[1].Split("<tt>")[1].Split("</tt>")[0].Replace("\n", ""),
@@ -87,44 +95,56 @@ namespace WebCrawler
             }
         }
 
-        static void ProcessCN()
+        static void _processCN()
         {
-            var webClient = new WebClient();
+            using var webClient = new WebClient();
+
             var webData = webClient.DownloadString(Wiki_CN);
+
             var tbody = webData.Split("<table class=\"wikitable sortable\">")[1]
                 .Split("<dl><dt>说明：</dt></dl>")[0].Replace("<tbody>", "").Replace("</tbody></table>", "");
+
             var trs = tbody.Split("<tr>")
                 .Select(o => o.Replace("</tr>", ""))
                 .Where(o => o != "\n\n" && !o.StartsWith("\n<th scope=\"col\">"));
+
             foreach (var tr in trs)
             {
                 var tds = tr.Split("</td>").Select(o => o.Replace("<td>", "").Replace("<td align=\"center\">", "")).ToList();
                 var twoLetterCode = tds[1].Split("<tt>")[1].Split("</tt>")[0].Replace("\n", "");
-                var model = Models.Where(o => o.TwoLetterCode == twoLetterCode).Single();
+                var model = _models.Where(o => o.TwoLetterCode == twoLetterCode).Single();
                 model.SimplifiedChineseName = tds[5].Split("<a href=").Last().Replace("</a>", "").Split(">")[1].Replace("\n", "");
             }
         }
 
-        static void GenerateFile(string fullPath)
+        static void _generateFile(string fullPath)
         {
             var jsonPath = Path.Combine(fullPath, "iso3166.json");
-            var jsonString = JsonConvert.SerializeObject(new { list = Models }, new JsonSerializerSettings()
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            var jsonString = JsonSerializer.Serialize(
+                new { list = _models },
+                new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                });
+
             File.WriteAllText(jsonPath, jsonString);
 
             var csPath = Path.Combine(fullPath, "Country.cs");
-            var notes = $"/*\r\n * Generated by WebCrawler at {DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}\r\n" +
+
+            var notes = $"/*\r\n * Generated by WebCrawler at {DateTime.Now:yyyy/MM/dd HH:mm:ss}\r\n" +
                 $" * Data source: {Wiki_TW} and {Wiki_CN}\r\n * License: https://creativecommons.org/licenses/by-sa/3.0/ \r\n */\r\n";
-            var countryModelTexts = Models
+
+            var countryModelTexts = _models
                 .Select(o => $"new CountryModel(\"{o.Name}\", \"{o.TwoLetterCode}\", \"{o.ThreeLetterCode}\", " +
                     $"\"{o.NumericCode}\", \"{o.TraditionalChineseName}\", \"{o.SimplifiedChineseName}\", {(o.Independent ? "true" : "false")})");
+
             var csString = notes + 
                 "using System.Collections.Generic;\r\nnamespace ISO3166\r\n{\r\n" +
                 "    public class Country\r\n    {\r\n        public static List<CountryModel> List = new List<CountryModel>()\r\n        {\r\n            " +
                 string.Join(",\r\n            ", countryModelTexts) +
                 "\r\n        };\r\n    }\r\n}";
+
             File.WriteAllText(csPath, csString);
 
             Console.WriteLine("Following files generated:");
